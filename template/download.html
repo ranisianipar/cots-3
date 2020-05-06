@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Remote Downlaod</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+        <script>
+            window.onload = function() {
+                var rabbitmq_host = "{{ rabbitmq_host }}";
+                var rabbitmq_user = "{{ rabbitmq_user  }}";
+                var rabbitmq_pass = "{{ rabbitmq_password }}";
+                var subscription_topic = "{{ subscription_topic }}";
+                var websocket_url = "{{ websocket_url }}";
+                var download_url = "{{ download_url }}";
+                var progress_state = 0;
+
+                var ws = new SockJS(websocket_url);
+                var client = Stomp.over(ws);
+
+                var on_receive = function(message) {
+                    console.log('Message received! Message:', message);
+                    message.ack();
+                    // progress_state + progress_retreived_by_message
+                    document.getElementById("progress").innerHTML = progress_state;
+                    
+                    if (progress_state >= 100) {
+                        client.disconnect(function() {
+                            alert("See you next time!");
+                        })
+                    }
+                }
+
+                var on_connect = function() {
+                    console.log('Yes, connected!');
+                    client.subscribe(subscription_topic, on_receive, {'ack': 'client'});
+                };
+
+                var on_error =  function() {
+                    console.log('error');
+                };
+
+                client.connect(rabbitmq_user, rabbitmq_pass, on_connect, on_error, rabbitmq_host);
+            }
+            
+        </script>
+    </head>
+
+    <body>
+        <h2>Result</h2>
+        <div id='messages'>
+            <p>Download Url:</p>{{download_url}}
+            <h3>Progress</h3>
+            <div id="progress">0</div>
+        </div>
+    </body>
+</html>

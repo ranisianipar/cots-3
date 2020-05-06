@@ -11,26 +11,30 @@ import time
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-# RABBITMQ_HOST = '152.118.148.95'
-# RABBITMQ_PORT = 5672
-# RABBITMQ_WEBSOCKET_PORT = 15674
-# RABBITMQ_USER = '0806444524'
-# RABBITMQ_PASSWORD = '0806444524'
-# RABBITMQ_VHOST = '/0806444524'
-
-# development
-RABBITMQ_HOST = 'localhost'
+RABBITMQ_HOST = '152.118.148.95'
 RABBITMQ_PORT = 5672
 RABBITMQ_WEBSOCKET_PORT = 15674
-RABBITMQ_USER = 'guest'
-RABBITMQ_PASSWORD = 'guest'
-RABBITMQ_VHOST = '/'
+RABBITMQ_USER = '0806444524'
+RABBITMQ_PASSWORD = '0806444524'
+RABBITMQ_VHOST = '/0806444524'
+
+# development
+# RABBITMQ_HOST = 'localhost'
+# RABBITMQ_PORT = 5672
+# RABBITMQ_WEBSOCKET_PORT = 15674
+# RABBITMQ_USER = 'guest'
+# RABBITMQ_PASSWORD = 'guest'
+# RABBITMQ_VHOST = '/'
 
 NPM = '1606885025'
 ROUTING_KEY = 'cots3'
 
 credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
-parameters = pika.ConnectionParameters(host=RABBITMQ_HOST, port=RABBITMQ_PORT, credentials=credentials)
+parameters = pika.ConnectionParameters(
+                host=RABBITMQ_HOST, 
+                port=RABBITMQ_PORT, 
+                virtual_host=RABBITMQ_VHOST,
+                credentials=credentials)
 
 # RabbitMQ
 class MessageService:

@@ -45,7 +45,7 @@ class MessageService:
         self.channel.exchange_declare(exchange=NPM, exchange_type='direct')
 
     def send_message(self, message):
-        self.channel.basic_publish(exchange=NPM, routing_key=NPM, body=message)
+        self.channel.basic_publish(exchange=NPM, routing_key=ROUTING_KEY, body=message)
         print(f'Publishing exchange={NPM} routing_key={ROUTING_KEY} body={message}')
             
     def close_channel(self):
@@ -56,7 +56,7 @@ def download_remotely(url):
     ms = MessageService()
 
     # do download file
-    downloded_file = os.system(f'wget "{url}" -o cots.log')
+    downloaded_file = os.system(f'wget "{url}" -o cots.log')
 
     # haven't figured the way out to get the progress
     for x in range(10):

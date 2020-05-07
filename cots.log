@@ -1,11 +1,21 @@
---2020-05-06 23:23:30--  http://www.google.com/
-Resolving www.google.com (www.google.com)... 216.239.38.120, 2001:4860:4802:32::78
-Connecting to www.google.com (www.google.com)|216.239.38.120|:80... connected.
+--2020-05-07 13:01:59--  http://hahaha.com/
+Resolving hahaha.com (hahaha.com)... 38.80.71.68
+Connecting to hahaha.com (hahaha.com)|38.80.71.68|:80... connected.
+HTTP request sent, awaiting response... 301 Unknown Error
+Location: http://www.hahaha.com/ [following]
+--2020-05-07 13:02:02--  http://www.hahaha.com/
+Resolving www.hahaha.com (www.hahaha.com)... 38.80.71.68
+Connecting to www.hahaha.com (www.hahaha.com)|38.80.71.68|:80... connected.
+HTTP request sent, awaiting response... 301 https://www.hahaha.com/
+Location: https://www.hahaha.com/ [following]
+--2020-05-07 13:02:04--  https://www.hahaha.com/
+Connecting to www.hahaha.com (www.hahaha.com)|38.80.71.68|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: unspecified [text/html]
 Saving to: ‘index.html’
 
-     0K .......... ...                                         69,1M=0s
+     0K .......... .......... .......... .......... .......... 60,8K
+    50K .......... .......... .                                51,9K=1,2s
 
-2020-05-06 23:23:30 (69,1 MB/s) - ‘index.html’ saved [13406]
+2020-05-07 13:02:08 (57,8 KB/s) - ‘index.html’ saved [73250]
 
